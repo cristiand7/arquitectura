@@ -6,6 +6,7 @@
 package controller;
 
 import entities.Auction;
+import entities.Suplier;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import negocio.AuctionFacadeRemote;
+import negocio.SuplierFacadeRemote;
 
 /**
  *
@@ -28,8 +30,15 @@ import negocio.AuctionFacadeRemote;
 public class EventSetupAuction implements Serializable {
 
     @EJB
+    private SuplierFacadeRemote suplierFacade;
+
+    @EJB
     private AuctionFacadeRemote auctionFacade;
 
+    
+    List<Suplier> supliers = new ArrayList<Suplier> ();
+    int idSuplier ;
+    
     /**
      * Creates a new instance of mbAuction
      */
@@ -69,4 +78,24 @@ public class EventSetupAuction implements Serializable {
         this.subastas = subastas;
     }
 
+    public List<Suplier> getSupliers() {
+        supliers = suplierFacade.findAll();
+        return supliers;
+    }
+
+    public void setSupliers(List<Suplier> supliers) {
+        this.supliers = supliers;
+    }
+
+    public int getIdSuplier() {
+        return idSuplier;
+    }
+
+    public void setIdSuplier(int idSuplier) {
+        this.idSuplier = idSuplier;
+    }
+
+    
+    
+    
 }
