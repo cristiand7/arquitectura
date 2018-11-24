@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Product implements Serializable {
     private String name;
     @Column(name = "DETAIL")
     private String detail;
+    
     @JoinColumn(name = "IDAUCTION", referencedColumnName = "IDAUCTION")
     @ManyToOne
     private Auction idauction;
@@ -72,7 +74,7 @@ public class Product implements Serializable {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
+    @XmlTransient
     public Auction getIdauction() {
         return idauction;
     }

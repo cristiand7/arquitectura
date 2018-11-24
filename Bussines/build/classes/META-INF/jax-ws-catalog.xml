@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://10.192.230.24:3000/ServicioWCF.svc?wsdl" uri="wsdl/10.192.230.24_3000/ServicioWCF.svc.wsdl"/>
+    <system systemId="file:/C:/Users/sala%20a/Downloads/wisdol.wsdl" uri="wsdl/wisdol.wsdl"/>
+    <system systemId="http://10.192.230.24:3000/ServicioWCF.svc?xsd=xsd0" uri="wsdl/10.192.230.24_3000/ServicioWCF.svc.xsd_xsd0.xsd"/>
+    <system systemId="http://10.192.230.24:3000/ServicioWCF.svc?xsd=xsd1" uri="wsdl/10.192.230.24_3000/ServicioWCF.svc.xsd_xsd1.xsd"/>
+    <system systemId="http://10.192.230.24:3000/ServicioWCF.svc?xsd=xsd2" uri="wsdl/10.192.230.24_3000/ServicioWCF.svc.xsd_xsd2.xsd"/>
+</catalog>

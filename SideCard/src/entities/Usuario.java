@@ -15,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -93,6 +94,7 @@ public class Usuario implements Serializable {
         this.suplierList = suplierList;
     }
 
+    @XmlTransient
     public List<Auction> getAuctionList() {
         return auctionList;
     }

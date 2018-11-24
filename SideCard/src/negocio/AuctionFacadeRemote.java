@@ -6,6 +6,7 @@
 package negocio;
 
 import entities.Auction;
+import entities.Auctionsuplier;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -29,5 +30,8 @@ public interface AuctionFacadeRemote {
     List<Auction> findRange(int[] range);
 
     int count();
+    
+     public Auctionsuplier getWinner(Long id);
+    
     
 }

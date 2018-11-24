@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
  * @author hikar
  */
 @Stateless
-public class FacadeQueryAuction extends AbstractFacade<Auction> {
+public class FacadeQueryAuction extends AbstractFacade<Auction>  implements negocio.FacadeQueryAcutionRemote,FacadeQueryAuctionLocal {
 
     @PersistenceContext(unitName = "BussinesPU")
     private EntityManager em;
@@ -35,6 +35,7 @@ public class FacadeQueryAuction extends AbstractFacade<Auction> {
         super(Auction.class);
     }
 
+    @Override
     public List<Auction> getAcutionByDates(String fechaInicio, String fechaFin) {
         
             List<Auction> res = new ArrayList<>();
@@ -45,11 +46,11 @@ public class FacadeQueryAuction extends AbstractFacade<Auction> {
             Date parsedDate1 = dateFormat.parse(fechaFin);
             Timestamp timestamp2 = new java.sql.Timestamp(parsedDate.getTime());
 
-            res = getEntityManager().createQuery("select a from Auction a where a.startdate > :fechaInicio "
-                    + " and < :fechafin ", Auction.class)
-                    .setParameter("fechainicio", parsedDate,TemporalType.DATE)
-                    .setParameter("fechafin", parsedDate1,TemporalType.DATE)
+            res = getEntityManager().createQuery("select a from Auction a where :fechaInicio < a.startdate and :fechaFin > a.closedate", Auction.class)
+                    .setParameter("fechaInicio", parsedDate,TemporalType.DATE)
+                    .setParameter("fechaFin", parsedDate1,TemporalType.DATE)
                     .getResultList();
+            System.out.println("encontrado --->"+res.size());
         } catch (Exception e) { //this generic but you can control nother types of exception
             // look the origin of excption 
             System.out.println("error query --->"+e);
@@ -57,5 +58,27 @@ public class FacadeQueryAuction extends AbstractFacade<Auction> {
 
         return res;
     }
+    @Override
+    public List<Auction> getAcutionByDatesRest(String fechaInicio, String fechaFin) {
+        
+            List<Auction> res = new ArrayList<>();
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = dateFormat.parse(fechaInicio);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            Date parsedDate1 = dateFormat.parse(fechaFin);
+            Timestamp timestamp2 = new java.sql.Timestamp(parsedDate.getTime());
 
+            res = getEntityManager().createQuery("select a from Auction a where :fechaInicio <= a.startdate and :fechaFin >= a.closedate", Auction.class)
+                    .setParameter("fechaInicio", parsedDate,TemporalType.DATE)
+                    .setParameter("fechaFin", parsedDate1,TemporalType.DATE)
+                    .getResultList();
+            System.out.println("encontrado --->"+res.size());
+        } catch (Exception e) { //this generic but you can control nother types of exception
+            // look the origin of excption 
+            System.out.println("error query --->"+e);
+        }
+
+        return res;
+    }
 }

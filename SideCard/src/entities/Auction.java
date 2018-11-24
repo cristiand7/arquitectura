@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,11 +22,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author hikar
  */
+@XmlRootElement
 @Entity
 @Table(name = "AUCTION")
 @NamedQueries({
@@ -46,14 +50,14 @@ public class Auction implements Serializable {
     @Column(name = "CLOSEDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date closedate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "auction")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "auction",fetch = FetchType.EAGER)
     private List<Auctionsuplier> auctionsuplierList;
-    @OneToMany(mappedBy = "idauction")
+    @OneToMany(mappedBy = "idauction",fetch = FetchType.EAGER)
     private List<Product> productList;
     @JoinColumn(name = "IDUSER", referencedColumnName = "IDUSER")
     @ManyToOne
     private Usuario iduser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idauction")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idauction",fetch = FetchType.EAGER)
     private List<Bid> bidList;
 
     public Auction() {
@@ -94,7 +98,7 @@ public class Auction implements Serializable {
     public void setAuctionsuplierList(List<Auctionsuplier> auctionsuplierList) {
         this.auctionsuplierList = auctionsuplierList;
     }
-
+    
     public List<Product> getProductList() {
         return productList;
     }
