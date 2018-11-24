@@ -39,6 +39,9 @@ public class Bid implements Serializable {
     @ManyToOne(optional = false)
     private Suplier idsuplier;
 
+
+    
+    
     public Bid() {
     }
 

@@ -18,5 +18,6 @@
         <property name="URL" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
         <property name="driverClass" value="oracle.jdbc.OracleDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="DBOracle" object-type="user" pool-name="oracle-thin_PUJDB_is321109Pool"/>
+    
+    <jdbc-resource enabled="true" jndi-name="OracleDB" object-type="user" pool-name="connectionPool"/>
 </resources>

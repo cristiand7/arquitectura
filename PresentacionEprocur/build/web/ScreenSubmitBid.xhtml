@@ -1,13 +1,65 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h1>Submit Bit</h1>
+        <h1>Submit Bid</h1>
+  
+       
+             <h:form enctype="multipart/form-data">
+         
+         <h:panelGrid columns="2">
+         
+             <h:panelGrid columns="1">
+             <h:outputLabel value="Select the Auction:"></h:outputLabel>
+             
+                <h:selectOneMenu value="#{EventSubmitBid.idAuction}"  >
+                   <f:selectItem itemLabel="Select a Suplier"/>
+                   <f:selectItems value="#{EventSubmitBid.auctions}" 
+                                  var="a" itemValue="#{a.idauction}" itemLabel="#{a.idauction}">           
+                   </f:selectItems>
+
+               </h:selectOneMenu>
+             </h:panelGrid>
+             
+             <h:panelGrid columns="1">
+             
+             <h:outputLabel value="Select the Suplier:"></h:outputLabel>
+             
+                  <h:selectOneMenu value="#{EventSubmitBid.idSuplier}"  >
+                      <f:selectItem itemLabel="Select a Suplier"/>
+                      <f:selectItems value="#{EventSubmitBid.supliers}" 
+                                     var="s" itemValue="#{s.idsuplier}" itemLabel="#{s.name}">           
+                      </f:selectItems>
+
+                  </h:selectOneMenu>
+
+
+             </h:panelGrid>
+             
+        </h:panelGrid> 
+             <h3>Amount</h3>
+                 
+                 <p:inputText id="value" required="true" value="#{EventSubmitBid.value}"/>
+                 
+            
+                 <p:commandButton value="Send Bid"  ajax="false " action="#{EventSubmitBid.save()}"/>
+            </h:form>
+             
+                         
+             
+   
+             
+      
+         
                 <h:link value="Back" outcome="index" />
+                
+                
  
     </h:body>
 </html>

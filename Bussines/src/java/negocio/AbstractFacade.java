@@ -23,7 +23,9 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
+        System.out.println("CREANDO-------------------------"+entity.toString());
         getEntityManager().persist(entity);
+        
     }
 
     public void edit(T entity) {
@@ -35,6 +37,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public T find(Object id) {
+        System.out.println("buscando por id:" +id);
         return getEntityManager().find(entityClass, id);
     }
 
